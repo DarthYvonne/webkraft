@@ -51,6 +51,21 @@
         </div>
     </div>
 
+    {{-- Home page --}}
+    <div class="rounded-xl border border-slate-200 bg-white">
+        <div class="border-b border-slate-100 px-5 py-3 font-semibold">Forside</div>
+        <div class="p-5">
+            <label class="mb-1 block text-sm font-medium text-slate-700">Hvilken side vises på forsiden (/)?</label>
+            <select name="home_page_id" class="w-full rounded-lg border-slate-300 text-sm focus:border-brand focus:ring-brand">
+                <option value="">— Første publicerede side —</option>
+                @foreach ($pages as $p)
+                    <option value="{{ $p->id }}" @selected((string) $s['home_page_id'] === (string) $p->id)>{{ $p->title }}</option>
+                @endforeach
+            </select>
+            <p class="mt-1 text-xs text-slate-400">Husk at <strong>publicere</strong> siden, ellers vises den ikke.</p>
+        </div>
+    </div>
+
     {{-- Contact --}}
     <div class="rounded-xl border border-slate-200 bg-white">
         <div class="border-b border-slate-100 px-5 py-3 font-semibold">Kontakt</div>

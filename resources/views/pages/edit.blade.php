@@ -91,12 +91,20 @@
             </div>
 
             @unless ($isNew)
-                <form method="POST" action="{{ $base }}/pages/{{ $page->id }}" onsubmit="return confirm('Slet denne side?')">
-                    @csrf @method('DELETE')
-                    <button class="w-full rounded-lg px-4 py-2 text-sm text-rose-600 hover:bg-rose-50">Slet siden</button>
-                </form>
+                {{-- Submits the separate delete form below via the HTML5 form=
+                     attribute. It must NOT be a nested <form> — that's invalid
+                     HTML and flips the editor's _method to DELETE on save. --}}
+                <button type="submit" form="wk-page-delete"
+                        class="w-full rounded-lg px-4 py-2 text-sm text-rose-600 hover:bg-rose-50">Slet siden</button>
             @endunless
         </div>
     </div>
 </form>
+
+@unless ($isNew)
+    <form id="wk-page-delete" method="POST" action="{{ $base }}/pages/{{ $page->id }}"
+          onsubmit="return confirm('Slet denne side?')" class="hidden">
+        @csrf @method('DELETE')
+    </form>
+@endunless
 @endsection

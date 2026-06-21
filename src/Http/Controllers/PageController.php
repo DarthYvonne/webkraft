@@ -17,10 +17,12 @@ class PageController extends Controller
         $segments = $path === '' ? [] : array_values(array_filter(explode('/', $path), fn ($s) => $s !== ''));
 
         if ($segments === []) {
-            // Root — render the configured home page, or let the host 404.
+            // Root — render the configured home page; fall back to the first
+            // published top-level page so the index is never a blank 404.
             $homeId = Setting::get('home_page_id');
-            abort_unless($homeId, 404);
-            $page = Page::published()->findOrFail((int) $homeId);
+            $page = $homeId ? Page::published()->find((int) $homeId) : null;
+            $page ??= Page::topLevel()->published()->ordered()->first();
+            abort_unless($page, 404);
         } elseif (count($segments) === 1) {
             $page = Page::topLevel()->where('slug', $segments[0])->published()->firstOrFail();
         } elseif (count($segments) === 2) {
