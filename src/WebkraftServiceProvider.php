@@ -17,6 +17,9 @@ class WebkraftServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'webkraft');
 
+        // Convenience: every Webkraft view can reference the admin base path.
+        $this->app['view']->share('webkraftBase', '/'.trim((string) config('webkraft.path', 'cms'), '/'));
+
         $this->registerRoutes();
         $this->registerPublishing();
     }

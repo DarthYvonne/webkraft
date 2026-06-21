@@ -40,6 +40,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Contact form recipient
+    |--------------------------------------------------------------------------
+    | Where the contact-form block sends submissions. Falls back to the app's
+    | configured mail "from" address when null.
+    */
+    'contact_email' => env('WEBKRAFT_CONTACT_EMAIL'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Branding defaults
     |--------------------------------------------------------------------------
     | Starting values for the public theme. These can be overridden per-site

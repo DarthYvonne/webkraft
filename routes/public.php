@@ -1,12 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkraft\Cms\Http\Controllers\ContactController;
+use Webkraft\Cms\Http\Controllers\PageController;
 
 /*
-| Public page rendering. Built out in Phase 3 (pages + nav). Kept as a
-| catch-all by slug so published Webkraft pages render on the host site.
+| Public page rendering. Catch-all by slug path (one or two levels), so
+| published Webkraft pages render on the host site. Registered last and
+| only matches what the host hasn't already claimed. Disable via
+| config('webkraft.public_routes') if the host renders pages itself.
 */
 
-// Phase 3 will register:
-// Route::get('/{path}', [\Webkraft\Cms\Http\Controllers\PageController::class, 'show'])
-//     ->where('path', '.*')->name('webkraft.page');
+Route::post('/wk/contact', [ContactController::class, 'submit'])->name('webkraft.contact');
+
+Route::get('/{path}', [PageController::class, 'show'])
+    ->where('path', '[A-Za-z0-9\-_/]+')
+    ->name('webkraft.page');
