@@ -1,0 +1,27 @@
+{
+    "name": "webkraft/cms",
+    "description": "Webkraft — a drop-in section + block CMS for Laravel.",
+    "type": "library",
+    "license": "proprietary",
+    "keywords": ["laravel", "cms", "webkraft"],
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^11.0|^12.0|^13.0",
+        "illuminate/database": "^11.0|^12.0|^13.0",
+        "illuminate/routing": "^11.0|^12.0|^13.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Webkraft\\Cms\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Webkraft\\Cms\\WebkraftServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
