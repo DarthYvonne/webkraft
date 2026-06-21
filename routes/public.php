@@ -13,6 +13,6 @@ use Webkraft\Cms\Http\Controllers\PageController;
 
 Route::post('/wk/contact', [ContactController::class, 'submit'])->name('webkraft.contact');
 
-Route::get('/{path}', [PageController::class, 'show'])
-    ->where('path', '[A-Za-z0-9\-_/]+')
-    ->name('webkraft.page');
+// Fallback: only handles URLs the host app hasn't already claimed, so it can
+// never shadow the host's own routes regardless of provider load order.
+Route::fallback([PageController::class, 'show'])->name('webkraft.page');
